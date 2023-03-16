@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const express = require('express');
 const app = express();
 const { User } = require('./db');
@@ -16,6 +18,13 @@ app.get('/', async (req, res, next) => {
 
 // POST /register
 // TODO - takes req.body of {username, password} and creates a new user with the hashed password
+
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+  const hashedPW = await bcrypt.hash(password, 7);
+  const newUser = await User.create({ username, password: hashedPW });
+  res.send(`successfully created user ${newUser.username}`);
+});
 
 // POST /login
 // TODO - takes req.body of {username, password}, finds user by username, and compares the password with the hashed version from the DB
