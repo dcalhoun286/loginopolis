@@ -17,7 +17,6 @@ app.get('/', async (req, res, next) => {
 });
 
 // POST /register
-// TODO - takes req.body of {username, password} and creates a new user with the hashed password
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -27,7 +26,20 @@ app.post('/register', async (req, res) => {
 });
 
 // POST /login
-// TODO - takes req.body of {username, password}, finds user by username, and compares the password with the hashed version from the DB
 
-// we export the app, not listening in here, so that we can run tests
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ where: { username: username }});
+  if (user !== null) {
+    const passwordMatches = await bcrypt.compare(password, user.password);
+    if (passwordMatches) {
+      res.send(`successfully logged in user ${user.username}`);
+    } else {
+      res.status(401).send('incorrect username or password');
+    }
+  } else {
+    res.status(401).send('incorrect username or password');
+  }
+});
+
 module.exports = app;
