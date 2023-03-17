@@ -1,5 +1,5 @@
 const app = require('./index');
-const { sequelize, seed } = require('./db');
+const { seed } = require('./db');
 
 const { PORT = 4000 } = process.env;
 
