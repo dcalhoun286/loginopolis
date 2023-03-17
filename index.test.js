@@ -1,9 +1,7 @@
 const app = require('./index');
-const { sequelize, User } = require('./db');
+const { User } = require('./db');
 const request = require('supertest');
 const seed = require('./db/seedFn');
-const seedData = require('./db/seedData');
-
 
 describe('Endpoints', () => {
     const testUserData = { username: 'bobbysmiles', password: 'youllneverguess' };
@@ -11,7 +9,7 @@ describe('Endpoints', () => {
     let loginResponse;
     
     beforeAll(async () => {
-        await sequelize.sync({ force: true }); // recreate db
+        // await sequelize.sync({ force: true }); // recreate db
         await seed();
         registerResponse = await request(app)
             .post('/register')

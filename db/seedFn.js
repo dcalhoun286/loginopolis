@@ -1,12 +1,13 @@
-const {sequelize} = require('./');
+const { database } = require('./db');
 const bcrypt = require('bcrypt');
 
-const {User} = require('./');
+const { User } = require('./User');
 const users = require('./seedData');
+
 const seed = async () => {
 
   try {
-    await sequelize.sync({ force: true }); // recreate db
+    await database.sync({ force: true }); // recreate db
     await Promise.all([
       users.forEach( async (user) => {
         const hashedPassword = await bcrypt.hash(user.password, 7);

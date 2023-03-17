@@ -10,11 +10,20 @@ app.use(express.urlencoded({extended:true}));
 app.get('/', async (req, res, next) => {
   try {
     res.send('<h1>Welcome to Loginopolis!</h1><p>Log in via POST /login or register via POST /register</p>');
-  } catch (error) {
-    console.error(error);
-    next(error)
+  } catch (err) {
+    console.error(err);
+    next(err);
   }
 });
+
+app.get('/users', async (req, res, next) => {
+  try {
+    const allUsers = await User.findAll();
+    res.send(allUsers);
+  } catch (err) {
+    console.error(err);
+  }
+})
 
 // POST /register
 

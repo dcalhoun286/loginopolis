@@ -1,6 +1,7 @@
-const {Sequelize, sequelize} = require('./db');
+const { database } = require('./db');
+const { Sequelize } = require('sequelize');
 
-const User = sequelize.define('users', {
+const User = database.define('users', {
   username: Sequelize.STRING,
   password: Sequelize.STRING
 });
