@@ -19,7 +19,8 @@ app.get('/', async (req, res, next) => {
 app.get('/users', async (req, res, next) => {
   try {
     const allUsers = await User.findAll();
-    res.send(allUsers);
+    const sentUserData = allUsers.map(user => user.username);
+    res.send(sentUserData);
   } catch (err) {
     console.error(err);
   }
