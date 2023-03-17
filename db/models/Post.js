@@ -2,8 +2,14 @@ const { database } = require('../db');
 const { DataTypes } = require('sequelize');
 
 const Post = database.define('posts', {
-    title: DataTypes.STRING,
-    content: DataTypes.STRING
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    content: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 });
 
 module.exports = { Post };
