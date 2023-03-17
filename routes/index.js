@@ -1,5 +1,8 @@
 const express = require('express');
 const indexRouter = express.Router();
+const usersRouter = require('./users');
+
+indexRouter.use('/users', usersRouter);
 
 // GET /
 indexRouter.get('', async (req, res, next) => {

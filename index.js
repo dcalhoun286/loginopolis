@@ -8,28 +8,11 @@ const indexRouter = require('./routes');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+// Routes
 app.use('/', indexRouter);
 
-// app.get('/', async (req, res, next) => {
-//   try {
-//     res.send('<h1>Welcome to Loginopolis!</h1><p>Log in via POST /login or register via POST /register</p>');
-//   } catch (err) {
-//     console.error(err);
-//     next(err);
-//   }
-// });
-
-app.get('/users', async (req, res, next) => {
-  try {
-    const allUsers = await User.findAll({ include: {model: Post }});
-    // const sentUserData = allUsers.map(user => user.username);
-    res.send(allUsers);
-  } catch (err) {
-    console.error(err);
-  }
-});
-
-// this is not the proper authentication / authorization flow, just trying to get it to work for now.
+// this GET /me route is not the proper authentication / authorization flow, just trying to get it to work for now.
 // I accomplished this by sending in the request body with the content-type set to x-www-form-urlencoded
 // this should actually incorporated into the flow of a POST /login request
 // GET /me
