@@ -36,13 +36,4 @@ app.get('/me', async (req, res, next) => {
   }
 });
 
-// POST /register
-
-app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  const hashedPW = await bcrypt.hash(password, 7);
-  const newUser = await User.create({ username, password: hashedPW });
-  res.send(`successfully created user ${newUser.username}`);
-});
-
 module.exports = app;
