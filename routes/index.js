@@ -1,7 +1,9 @@
 const express = require('express');
 const indexRouter = express.Router();
 const usersRouter = require('./users');
+const authRouter = require('../auth');
 
+indexRouter.use(authRouter);
 indexRouter.use('/users', usersRouter);
 
 // GET /
