@@ -1,11 +1,23 @@
 [
   {
     "username": "brett",
-    "password": "brettpass"
+    "password": "brettpass",
+    "posts": [
+      {
+        "title": "What is Love",
+        "content": "Baby, don't hurt me anymore"
+      }
+    ]
   },
   {
     "username": "antonette",
-    "password": "headfirst"
+    "password": "headfirst",
+    "posts": [
+      {
+        "title": "Woodchucks",
+        "content": "How much wood can a woodchuck chuck if a woodchuck could chuck wood?"
+      }
+    ]
   },
   {
     "username": "karianne",
