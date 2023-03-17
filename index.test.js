@@ -32,7 +32,7 @@ describe('Endpoints', () => {
             const getAllUsersResponse = await request(app).get('/users');
             expect(getAllUsersResponse.status).toBe(200);
             expect(getAllUsersResponse._body.length).toBe(5);
-            expect(getAllUsersResponse._body.sort()).toEqual(['brett', 'antonette', 'karianne', 'buster', 'bobbysmiles'].sort());
+            expect(getAllUsersResponse._body.map(user => user.username).sort()).toEqual(['brett', 'antonette', 'karianne', 'buster', 'bobbysmiles'].sort());
         })
     })
 
