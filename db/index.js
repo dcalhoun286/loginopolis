@@ -1,4 +1,4 @@
-const { User } = require('./User');
+const { User } = require('./models');
 const seed = require('./seedFn');
 const { database } = require('./db');
 
