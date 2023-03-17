@@ -1,7 +1,7 @@
 const { database } = require('./db');
 const bcrypt = require('bcrypt');
 
-const { User } = require('./models');
+const { User, Post } = require('./models');
 const users = require('./seedData');
 
 const seed = async () => {
@@ -10,8 +10,29 @@ const seed = async () => {
     await database.sync({ force: true }); // recreate db
     await Promise.all([
       users.forEach( async (user) => {
+
         const hashedPassword = await bcrypt.hash(user.password, 7);
-        await User.create({ username: user.username, password: hashedPassword });
+
+        const newUser = await User.create(
+          { 
+            username: user.username,
+            password: hashedPassword
+          }
+        );
+
+        if (user.posts?.length) {
+          for (const post of user.posts) {
+            const newPost = await Post.create(
+              {
+                title: post.title,
+                content: post.content
+              }
+            )
+
+            await newUser.addPost(newPost);
+          }
+        }
+
       })
     ]);
 

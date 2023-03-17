@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const express = require('express');
 const app = express();
-const { User } = require('./db');
+const { User, Post } = require('./db');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -18,9 +18,9 @@ app.get('/', async (req, res, next) => {
 
 app.get('/users', async (req, res, next) => {
   try {
-    const allUsers = await User.findAll();
-    const sentUserData = allUsers.map(user => user.username);
-    res.send(sentUserData);
+    const allUsers = await User.findAll({ include: {model: Post }});
+    // const sentUserData = allUsers.map(user => user.username);
+    res.send(allUsers);
   } catch (err) {
     console.error(err);
   }
