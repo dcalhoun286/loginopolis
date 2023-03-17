@@ -12,9 +12,10 @@ app.use(express.urlencoded({extended:true}));
 // Routes
 app.use('/', indexRouter);
 
-// this GET /me route is not the proper authentication / authorization flow, just trying to get it to work for now.
+// the below GET /me route is not the proper authentication / authorization flow, just trying to get it to work for now.
 // I accomplished this by sending in the request body with the content-type set to x-www-form-urlencoded
 // this should actually incorporated into the flow of a POST /login request
+
 // GET /me
 
 app.get('/me', async (req, res, next) => {
